@@ -33,6 +33,7 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
+// initial commit
 
 function App() {
 
