@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import axios from "axios";
+import React, {ChangeEvent, useEffect, useState} from 'react'
+import {todolistAPI} from "../api/todolist-api";
 
 
 export default {
@@ -9,28 +9,13 @@ export default {
 // withCredentials определяет, должны ли межсайтовые (кроссдоменные) запросы
 // выполняться с использованием учетных данных (cookie)
 
-type ToDoList = {
-    id: string
-    title: string
-    addedDate: Date
-    order: number
-}
-
-
-const setting = {
-    withCredentials: true,
-    headers: {
-        'API-KEY': '90693c4a-358e-42c0-a191-4a11d81072dd'
-    }
-}
-
 
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
 
     useEffect(() => {
 
-        axios.get<ToDoList[]>('https://social-network.samuraijs.com/api/1.1/todo-lists', setting)
+        todolistAPI.detTodolists()
             .then((res) => {
                 setState(res.data)
             })
@@ -48,7 +33,7 @@ export const CreateTodolist = () => {
 
         let title = "EEEEEEEEEEEEEEEEE"
 
-        axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, setting)
+        todolistAPI.createTodolist(title)
             .then((res) => {
                 setState(res.data)
             })
@@ -62,36 +47,62 @@ export const CreateTodolist = () => {
 
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
+    const [ID, setID] = useState<string>('null')
 
 
-    useEffect(() => {
+    const localCallBack = (event: ChangeEvent<HTMLInputElement>) => {
+        setID(event.currentTarget.value)
+    }
+    const callBack = () => {
 
-        let listID = "ff65ed8a-c6d9-4738-a66c-5d8fee5a9e87"
-
-        axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${listID}`, setting)
+        todolistAPI.deleteTodolist(ID)
             .then((res) => {
                 setState(res.data)
-            })
 
+            }).catch((rej) => {
+            setState(rej.response)
+        })
 
-    }, [])
+    }
 
-    return <div> {JSON.stringify(state)}</div>
+    return <div> {JSON.stringify(state)}
+        <div>
+            <input type={"text"} onChange={localCallBack}/>
+            <button onClick={callBack}>delete</button>
+        </div>
+    </div>
 }
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
+    const [listID, setlistID] = useState<string>('')
+    const [listTitle, setlistTitle] = useState<string>('')
 
-    useEffect(() => {
+    const setIDCB = (event: ChangeEvent<HTMLInputElement>) => {
+        setlistID(event.currentTarget.value)
+    }
 
-        let listID = "0195f7cc-13d6-4534-8de7-47a721800ba3"
-        let title = "AAAAAAAAAAAAAAAA"
+    const setTitleCB = (event: ChangeEvent<HTMLInputElement>) => {
+        setlistTitle(event.currentTarget.value)
+    }
 
-        axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${listID}`, {title}, setting)
+    const callBack = () => {
+
+        todolistAPI.updateTodolistTitle(listID, listTitle)
             .then((res) => {
                 setState(res.data)
-            })
+            }).catch((rej) => {
+            setState(rej.response.data)
+        }).finally(() => {
+            setlistID('')
+            setlistTitle('')
+        })
+    }
 
-    }, [])
-
-    return <div> {JSON.stringify(state)}</div>
+    return <div> {JSON.stringify(state)}
+        <div>
+            <div><label><input type={"text"} onChange={setTitleCB}/>Title</label></div>
+            <div><label><input type={"text"} onChange={setIDCB}/>ID</label></div>
+            <button onClick={callBack}>update</button>
+        </div>
+    </div>
 }
