@@ -15,11 +15,10 @@ export const GetTodolists = () => {
 
     useEffect(() => {
 
-        todolistAPI.detTodolists()
+        todolistAPI.getTodolists()
             .then((res) => {
                 setState(res.data)
             })
-
 
     }, [])
 
@@ -43,8 +42,6 @@ export const CreateTodolist = () => {
 
     return <div> {JSON.stringify(state)}</div>
 }
-
-
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     const [ID, setID] = useState<string>('null')
@@ -92,9 +89,6 @@ export const UpdateTodolistTitle = () => {
                 setState(res.data)
             }).catch((rej) => {
             setState(rej.response.data)
-        }).finally(() => {
-            setlistID('')
-            setlistTitle('')
         })
     }
 

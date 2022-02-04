@@ -1,47 +1,53 @@
-import axios from "axios";
-import {
-    CreateTodolist,
-    DeleteTodolist,
-    UpdateTodolistTitle
-} from "../stories/todolists-api.stories";
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 
-export {}
-
-const setting = {
+const setting = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
         'API-KEY': '90693c4a-358e-42c0-a191-4a11d81072dd'
     }
+})
+
+type CreateTodoListType = {
+    item: TodoListType
 }
 
-
-type ToDoList = {
+type TodoListType = {
     id: string
     title: string
-    addedDate: Date
+    addedDate: string
     order: number
 }
 
+type CommonType<T = {}> = {
+    data: T
+    fieldsErrors: []
+    messages: []
+    resultCode: 0
+}
+
+
 type todolistAPIType = {
-    detTodolists: () => Promise<any>
+    getTodolists: () => Promise<AxiosResponse<TodoListType[]>>
     createTodolist: (title: string) => Promise<any>
     deleteTodolist: (listID: string) => Promise<any>
     updateTodolistTitle: (listID: string, title: string) => Promise<any>
 }
 
 
-export const todolistAPI: todolistAPIType = {
-    detTodolists: () => {
-        return axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', setting)
+export const todolistAPI = {
+    getTodolists: () => {
+        return setting.get('/todo-lists')
     },
-
-    createTodolist: (title) => {
-        return axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title}, setting)
+    createTodolist: (title: string) => {
+        return setting.post <CommonType<CreateTodoListType>,
+            AxiosResponse<CommonType<CreateTodoListType>>,
+            { title: string }>('/todo-lists', {title: title})
     },
-    deleteTodolist: (listID) => {
-        return axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${listID}`, setting)
+    deleteTodolist: (listID: string) => {
+        return setting.delete<CommonType, AxiosResponse<CommonType>>(`/todo-lists/${listID}`)
     },
-    updateTodolistTitle: (listID, title) => {
-        return axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${listID}`, {title}, setting)
+    updateTodolistTitle: (listID: string, title: string) => {
+        return setting.put<CommonType, AxiosResponse<CommonType>>(`/todo-lists/${listID}`, {title})
     }
 }
