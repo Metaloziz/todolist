@@ -26,13 +26,37 @@ type CommonType<T = {}> = {
     resultCode: 0
 }
 
-type todolistAPIType = {
-    getTodolists: () => Promise<AxiosResponse<TodoListType[]>>
-    createTodolist: (title: string) => Promise<any>
-    deleteTodolist: (listID: string) => Promise<any>
-    updateTodolistTitle: (listID: string, title: string) => Promise<any>
+// type todolistAPIType = {
+//     getTodolists: () => Promise<AxiosResponse<TodoListType[]>>
+//     createTodolist: (title: string) => Promise<any>
+//     deleteTodolist: (listID: string) => Promise<any>
+//     updateTodolistTitle: (listID: string, title: string) => Promise<any>
+// }
+
+
+type GetTasksType = {
+    items: TaskType[]
+    totalCount: number
+    error: string
 }
 
+export type TaskType = {
+    description: string
+    title: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
+
+type PostTaskResponseType = {
+    item: TaskType
+}
 
 export const todolistAPI = {
     getTodolists: () => {
@@ -47,13 +71,15 @@ export const todolistAPI = {
         return setting.delete<CommonType, AxiosResponse<CommonType>>(`/todo-lists/${listID}`)
     },
     updateTodolistTitle: (listID: string, title: string) => {
-        return setting.put<CommonType, AxiosResponse<CommonType>>(`/todo-lists/${listID}`, {title})
+        return setting.put<CommonType, AxiosResponse<CommonType>, { title: string }>(`/todo-lists/${listID}`, {title})
     },
 
     getTasks: (listID: string) => {
-        return setting.get(`/todo-lists/${listID}/tasks`)
+        return setting.get<GetTasksType, AxiosResponse<GetTasksType>>(`/todo-lists/${listID}/tasks`)
     },
     postTask: (listID: string, value: string) => {
-        return setting.post(`/todo-lists/${listID}/tasks`, {title: value})
+        return setting.post<CommonType<PostTaskResponseType>,
+            AxiosResponse<CommonType<PostTaskResponseType>>,
+            { title: string }>(`/todo-lists/${listID}/tasks`, {title: value})
     }
 }

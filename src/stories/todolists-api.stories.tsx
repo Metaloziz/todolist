@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import {todolistAPI, TodoListType} from "../api/todolist-api";
+import {TaskType, todolistAPI, TodoListType} from "../api/todolist-api";
 
 
 export default {
@@ -96,13 +96,39 @@ export const UpdateTodolistTitle = () => {
 /// tasks
 
 export const GetTask = () => {
-    const [state, setState] = useState<any>(null)
-    const [listID, setlistID] = useState<string>('')
+    const [state, setState] = useState<TaskType[]>([])
+    const [listID, setListID] = useState<string>('')
 
     const callBack = () => {
         todolistAPI.getTasks(listID)
             .then((res) => {
-                setState(res.data)
+                setState(res.data.items)
+            })
+    }
+
+    const setIDCB = (event: ChangeEvent<HTMLInputElement>) => {
+        setListID(event.currentTarget.value)
+    }
+
+    return <div>
+        <div>
+            <label><input type={"text"} onChange={setIDCB}/>listID</label>
+            <div>
+                <button onClick={callBack}>get</button>
+            </div>
+            <div> {state.map(el => <div>{JSON.stringify(el)}<hr/></div>)}</div>
+        </div>
+    </div>
+}
+
+export const PostTask = () => {
+    const [state, setState] = useState<any>(null)
+    const [listID, setlistID] = useState<string>('')
+
+    const callBack = () => {
+        todolistAPI.postTask(listID, 'new taskTitle')
+            .then((response) => {
+                setState(response.data.data.item)
             })
     }
 
@@ -114,7 +140,7 @@ export const GetTask = () => {
         <div>
             <label><input type={"text"} onChange={setIDCB}/>listID</label>
             <div>
-                <button onClick={callBack}>get</button>
+                <button onClick={callBack}>post</button>
             </div>
             <div>{JSON.stringify(state)}</div>
         </div>
