@@ -95,7 +95,7 @@ export const UpdateTodolistTitle = () => {
 
 /// tasks
 
-export const GetTask = () => {
+export const GetTasks = () => {
     const [state, setState] = useState<TaskType[]>([])
     const [listID, setListID] = useState<string>('')
 
@@ -141,6 +141,44 @@ export const PostTask = () => {
             <label><input type={"text"} onChange={setIDCB}/>listID</label>
             <div>
                 <button onClick={callBack}>post</button>
+            </div>
+            <div>{JSON.stringify(state)}</div>
+        </div>
+    </div>
+}
+
+export const PutTask = () => {
+    const [state, setState] = useState<any>(null)
+    const [listID, setListID] = useState<string>('ef1523d6-b657-4497-9742-afe9e1935b0f')
+    const [taskID, setTaskID] = useState<string>('1a4963bf-0bcd-48ef-a200-444181d44ee5')
+    const [title, setTitle] = useState<string>('')
+
+    const callBack = () => {
+        todolistAPI.putTask(listID, taskID,title)
+            .then((response) => {
+                setState(response.data)
+            }).catch((error)=>{
+            setState(error)
+        })
+    }
+
+    const setListIDCB = (event: ChangeEvent<HTMLInputElement>) => {
+        // setListID(event.currentTarget.value)
+    }
+    const setTaskIDCB = (event: ChangeEvent<HTMLInputElement>) => {
+        // setTaskID(event.currentTarget.value)
+    }
+    const setTitleIDCB = (event: ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.currentTarget.value)
+    }
+
+    return <div>
+        <div>
+            <div><input type={"text"} value={listID} onChange={setListIDCB}/>listID</div>
+            <div><input type={"text"} value={taskID} onChange={setTaskIDCB}/>TaskID</div>
+            <div><input type={"text"} value={title} onChange={setTitleIDCB}/>Title</div>
+            <div>
+                <button onClick={callBack}>put</button>
             </div>
             <div>{JSON.stringify(state)}</div>
         </div>

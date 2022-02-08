@@ -1,4 +1,5 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+import {v1} from "uuid";
 
 const setting = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -46,15 +47,15 @@ export type TaskType = {
     completed: boolean
     status: number
     priority: number
-    startDate: string
-    deadline: string
+    startDate: Date
+    deadline: Date
     id: string
     todoListId: string
     order: number
-    addedDate: string
+    addedDate: Date
 }
 
-type PostTaskResponseType = {
+type TaskResponseType = {
     item: TaskType
 }
 
@@ -78,8 +79,29 @@ export const todolistAPI = {
         return setting.get<GetTasksType, AxiosResponse<GetTasksType>>(`/todo-lists/${listID}/tasks`)
     },
     postTask: (listID: string, value: string) => {
-        return setting.post<CommonType<PostTaskResponseType>,
-            AxiosResponse<CommonType<PostTaskResponseType>>,
+        return setting.post<CommonType<TaskResponseType>,
+            AxiosResponse<CommonType<TaskResponseType>>,
             { title: string }>(`/todo-lists/${listID}/tasks`, {title: value})
+    },
+
+    putTask: (listID: string, taskId: string, title:string) => {
+
+        let changedTask:TaskType = {
+            id: taskId,
+            title: title,
+            completed: false,
+            deadline: new Date(),
+            description: 'some text',
+            priority: 1,
+            startDate: new Date(),
+            addedDate: new Date(),
+            order: 1,
+            todoListId: listID,
+            status: 0
+        }
+
+        return setting.put<CommonType<TaskResponseType>,
+            AxiosResponse<CommonType<TaskResponseType>>,
+            TaskType >(`/todo-lists/${listID}/tasks/${taskId}`, changedTask)
     }
 }
