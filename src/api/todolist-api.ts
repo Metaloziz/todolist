@@ -26,7 +26,6 @@ type CommonType<T = {}> = {
     resultCode: 0
 }
 
-
 type todolistAPIType = {
     getTodolists: () => Promise<AxiosResponse<TodoListType[]>>
     createTodolist: (title: string) => Promise<any>
@@ -37,7 +36,7 @@ type todolistAPIType = {
 
 export const todolistAPI = {
     getTodolists: () => {
-        return setting.get('/todo-lists')
+        return setting.get<TodoListType[], AxiosResponse<TodoListType[]>>('/todo-lists')
     },
     createTodolist: (title: string) => {
         return setting.post <CommonType<CreateTodoListType>,

@@ -9,7 +9,6 @@ export default {
 // withCredentials определяет, должны ли межсайтовые (кроссдоменные) запросы
 // выполняться с использованием учетных данных (cookie)
 
-
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
 
@@ -27,17 +26,12 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
 
-
     useEffect(() => {
-
         let title = "EEEEEEEEEEEEEEEEE"
-
         todolistAPI.createTodolist(title)
             .then((res) => {
-                setState(res.data)
+                setState(res.data.data.item)
             })
-
-
     }, [])
 
     return <div> {JSON.stringify(state)}</div>
@@ -55,13 +49,10 @@ export const DeleteTodolist = () => {
         todolistAPI.deleteTodolist(ID)
             .then((res) => {
                 setState(res.data)
-
             }).catch((rej) => {
             setState(rej.response)
         })
-
     }
-
     return <div> {JSON.stringify(state)}
         <div>
             <input type={"text"} onChange={localCallBack}/>
@@ -69,6 +60,7 @@ export const DeleteTodolist = () => {
         </div>
     </div>
 }
+
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     const [listID, setlistID] = useState<string>('')
