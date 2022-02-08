@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import {todolistAPI} from "../api/todolist-api";
+import {todolistAPI, TodoListType} from "../api/todolist-api";
 
 
 export default {
@@ -10,7 +10,7 @@ export default {
 // выполняться с использованием учетных данных (cookie)
 
 export const GetTodolists = () => {
-    const [state, setState] = useState<any>(null)
+    const [state, setState] = useState<TodoListType[]>([])
 
     useEffect(() => {
 
@@ -21,7 +21,9 @@ export const GetTodolists = () => {
 
     }, [])
 
-    return <div> {JSON.stringify(state)}</div>
+    return <div>{state.map(el => <div>{JSON.stringify(el)}
+        <hr/>
+    </div>)}</div>
 }
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
@@ -60,7 +62,6 @@ export const DeleteTodolist = () => {
         </div>
     </div>
 }
-
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     const [listID, setlistID] = useState<string>('')
@@ -75,7 +76,6 @@ export const UpdateTodolistTitle = () => {
     }
 
     const callBack = () => {
-
         todolistAPI.updateTodolistTitle(listID, listTitle)
             .then((res) => {
                 setState(res.data)
@@ -89,6 +89,34 @@ export const UpdateTodolistTitle = () => {
             <div><label><input type={"text"} onChange={setTitleCB}/>Title</label></div>
             <div><label><input type={"text"} onChange={setIDCB}/>ID</label></div>
             <button onClick={callBack}>update</button>
+        </div>
+    </div>
+}
+
+/// tasks
+
+export const GetTask = () => {
+    const [state, setState] = useState<any>(null)
+    const [listID, setlistID] = useState<string>('')
+
+    const callBack = () => {
+        todolistAPI.getTasks(listID)
+            .then((res) => {
+                setState(res.data)
+            })
+    }
+
+    const setIDCB = (event: ChangeEvent<HTMLInputElement>) => {
+        setlistID(event.currentTarget.value)
+    }
+
+    return <div>
+        <div>
+            <label><input type={"text"} onChange={setIDCB}/>listID</label>
+            <div>
+                <button onClick={callBack}>get</button>
+            </div>
+            <div>{JSON.stringify(state)}</div>
         </div>
     </div>
 }

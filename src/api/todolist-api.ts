@@ -12,7 +12,7 @@ type CreateTodoListType = {
     item: TodoListType
 }
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     addedDate: string
@@ -48,5 +48,12 @@ export const todolistAPI = {
     },
     updateTodolistTitle: (listID: string, title: string) => {
         return setting.put<CommonType, AxiosResponse<CommonType>>(`/todo-lists/${listID}`, {title})
+    },
+
+    getTasks: (listID: string) => {
+        return setting.get(`/todo-lists/${listID}/tasks`)
+    },
+    postTask: (listID: string, value: string) => {
+        return setting.post(`/todo-lists/${listID}/tasks`, {title: value})
     }
 }
