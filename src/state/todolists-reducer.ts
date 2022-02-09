@@ -1,4 +1,4 @@
-import { v1 } from 'uuid';
+import {v1} from 'uuid';
 import {TodolistType} from "../api/todolist-api";
 
 export type RemoveTodolistActionType = {
@@ -49,12 +49,13 @@ export const todolistsReducer = (state: TodolistDomainType[] = initialState, act
             }, ...state]
         }
         case 'CHANGE-TODOLIST-TITLE': {
-            const todolist = state.find(tl => tl.id === action.id);
-            if (todolist) {
-                // если нашёлся - изменим ему заголовок
-                todolist.title = action.title;
-            }
-            return [...state]
+
+            let copyState = [...state]
+
+            return copyState.map(el => el.id === action.id ? {
+                ...el,
+                title: action.title
+            } : el)
         }
         case 'CHANGE-TODOLIST-FILTER': {
             const todolist = state.find(tl => tl.id === action.id);

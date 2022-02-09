@@ -31,7 +31,7 @@ import {TaskStatus, TaskType} from './api/todolist-api';
 
 
 export type TasksStateType = {
-    [key: string]: Array<TaskType>
+    [key: string]: TaskType[]
 }
 
 // initial commit
