@@ -1,18 +1,11 @@
 import axios, {AxiosResponse} from "axios";
 
-const setting = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
-    withCredentials: true,
-    headers: {
-        'API-KEY': '90693c4a-358e-42c0-a191-4a11d81072dd'
-    }
-})
 
 type CreateTodoListType = {
-    item: TodoListType
+    item: TodolistType
 }
 
-export type TodoListType = {
+export type TodolistType = {
     id: string
     title: string
     addedDate: string
@@ -40,12 +33,28 @@ type GetTasksType = {
     error: string
 }
 
+export enum TaskStatus {
+    New,
+    InProgress,
+    Completed,
+    Draft,
+}
+
+export enum TaskPriorities {
+    Low,
+    Middle,
+    Hi,
+    Urgently,
+    Later,
+}
+
+
 export type TaskType = {
     description: string
     title: string
     completed: boolean
-    status: number
-    priority: number
+    status: TaskStatus
+    priority: TaskPriorities
     startDate: Date
     deadline: Date
     id: string
@@ -58,9 +67,18 @@ type TaskResponseType = {
     item: TaskType
 }
 
+
+const setting = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+    withCredentials: true,
+    headers: {
+        'API-KEY': '90693c4a-358e-42c0-a191-4a11d81072dd'
+    }
+})
+
 export const todolistAPI = {
     getTodolists: () => {
-        return setting.get<TodoListType[], AxiosResponse<TodoListType[]>>('/todo-lists')
+        return setting.get<TodolistType[], AxiosResponse<TodolistType[]>>('/todo-lists')
     },
     createTodolist: (title: string) => {
         return setting.post <CommonType<CreateTodoListType>,
@@ -83,9 +101,9 @@ export const todolistAPI = {
             { title: string }>(`/todo-lists/${listID}/tasks`, {title: value})
     },
 
-    putTask: (listID: string, taskId: string, title:string) => {
+    putTask: (listID: string, taskId: string, title: string) => {
 
-        let changedTask:TaskType = {
+        let changedTask: TaskType = {
             id: taskId,
             title: title,
             completed: false,
@@ -101,9 +119,9 @@ export const todolistAPI = {
 
         return setting.put<CommonType<TaskResponseType>,
             AxiosResponse<CommonType<TaskResponseType>>,
-            TaskType >(`/todo-lists/${listID}/tasks/${taskId}`, changedTask)
+            TaskType>(`/todo-lists/${listID}/tasks/${taskId}`, changedTask)
     },
-    deleteTask:(listID: string, taskId: string)=>{
+    deleteTask: (listID: string, taskId: string) => {
         return setting.delete<CommonType, AxiosResponse<CommonType>>(`/todo-lists/${listID}/tasks/${taskId}`)
     }
 }

@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import {TaskType, todolistAPI, TodoListType} from "../api/todolist-api";
+import {TaskType, todolistAPI, TodolistType} from "../api/todolist-api";
 
 
 export default {
@@ -10,7 +10,7 @@ export default {
 // выполняться с использованием учетных данных (cookie)
 
 export const GetTodolists = () => {
-    const [state, setState] = useState<TodoListType[]>([])
+    const [state, setState] = useState<TodolistType[]>([])
 
     useEffect(() => {
 
@@ -219,3 +219,17 @@ export const DeleteTask = () => {
         </div>
     </div>
 }
+
+
+
+
+
+enum TaskStatus {
+    one=10,
+    two=12,
+    three,
+
+}
+
+let a:TaskStatus = TaskStatus.one
+
