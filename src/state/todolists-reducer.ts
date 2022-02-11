@@ -106,9 +106,7 @@ export const SetTodoListThunk =()=>(dispatch: Dispatch)=>{
   todolistsAPI
     .getTodolists()
     .then((res) => {
-
       dispatch(setTodolistsAC(res.data))
-
     })
 
 }
