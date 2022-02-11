@@ -43,7 +43,6 @@ function App() {
     dispatch(SetTodoListThunk())
   }, [dispatch])
 
-
   const removeTask = useCallback(function (id: string, todolistId: string) {
     const action = removeTaskAC(id, todolistId);
     dispatch(action);

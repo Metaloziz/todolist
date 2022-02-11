@@ -15,7 +15,6 @@ type PropsType = {
   title: string
   tasks: Array<TaskType>
   changeFilter: (value: FilterValuesType, todolistId: string) => void
-  // addTask: (title: string, todolistId: string) => void
   changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
   changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
   removeTask: (taskId: string, todolistId: string) => void
@@ -36,7 +35,6 @@ export const Todolist = React.memo(function (props: PropsType) {
 
   const addTask = useCallback((title: string) => {
     dispatch(addTasksTC(props.id, title))
-    // props.addTask(title, props.id)
   }, [props.id])
 
   const removeTodolist = () => {
@@ -49,7 +47,6 @@ export const Todolist = React.memo(function (props: PropsType) {
   const onAllClickHandler = useCallback(() => props.changeFilter('all', props.id), [props.id, props.changeFilter])
   const onActiveClickHandler = useCallback(() => props.changeFilter('active', props.id), [props.id, props.changeFilter])
   const onCompletedClickHandler = useCallback(() => props.changeFilter('completed', props.id), [props.id, props.changeFilter])
-
 
   let tasksForTodolist = props.tasks
 
