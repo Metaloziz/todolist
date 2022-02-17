@@ -12,7 +12,7 @@ import {
 } from '../../api/todolists-api'
 import {Dispatch} from 'redux'
 import {AppRootStateType} from '../../app/store'
-import {AppActionsType, appLoadingAC} from "../../app/app-reducer";
+import {AppActionsType, appErrorAC, appLoadingAC} from "../../app/app-reducer";
 
 const initialState: TasksStateType = {}
 
@@ -92,7 +92,11 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
       const action = addTaskAC(task)
       dispatch(action)
       dispatch(appLoadingAC("succeeded"))
-    })
+    }).catch((rej) => {
+    debugger
+    dispatch(appLoadingAC("succeeded"))
+    dispatch(appErrorAC(rej['messages'][0]))
+  })
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
   (dispatch: Dispatch<ActionsType>, getState: () => AppRootStateType) => {

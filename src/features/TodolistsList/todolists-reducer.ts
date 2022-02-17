@@ -1,6 +1,6 @@
 import {todolistsAPI, TodolistType} from '../../api/todolists-api'
 import {Dispatch} from 'redux'
-import {AppActionsType, appLoadingAC, appLoadingACType} from '../../app/app-reducer'
+import {AppActionsType, appLoadingAC} from '../../app/app-reducer'
 
 const initialState: Array<TodolistDomainType> = []
 
