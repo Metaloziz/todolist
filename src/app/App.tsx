@@ -13,9 +13,18 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import {Menu} from '@mui/icons-material';
 import {LinearProgress} from "@mui/material";
+import {AppRootStateType} from "../state/store";
+import {RequestStatusType} from "./app-reducer";
+import {useSelector} from "react-redux";
 
 
 function App() {
+
+
+  let isLoading = useSelector<AppRootStateType, RequestStatusType>((state) => {
+    // debugger
+    return state.app.status
+  })
 
   return (
     <div className="App">
@@ -24,13 +33,14 @@ function App() {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <Menu/>
           </IconButton>
-          <LinearProgress/>
+
           <Typography variant="h6">
             News
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      {isLoading === "loading" && <LinearProgress color={"warning"}/>}
       <Container fixed>
         <TodolistsList/>
       </Container>

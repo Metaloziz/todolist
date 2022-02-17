@@ -6,7 +6,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const appReducer = (state: InitialStateType = initialState, action: AppActionsType): InitialStateType => {
   switch (action.type) {
     case 'APP/SET-STATUS':
       return {...state, status: action.status}
@@ -15,4 +15,12 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
   }
 }
 
-type ActionsType = any
+
+export const appLoadingAC = (status: RequestStatusType) => ({
+  type: 'APP/SET-STATUS',
+  status,
+} as const)
+
+export type appLoadingACType = ReturnType<typeof appLoadingAC>
+
+export type AppActionsType = appLoadingACType
