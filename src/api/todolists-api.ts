@@ -4,18 +4,14 @@ const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.1/',
   withCredentials: true,
   headers: {
-    'API-KEY': '23305a43-aad1-4ff5-88c1-fef9291b028f'
+    'API-KEY': '6d28cae1-0bac-4f22-abce-7f5967410738'
   }
 })
-
-type DataType = {
-  title: string
-}
 
 // api
 export const todolistsAPI = {
   getTodolists() {
-    return instance.get<null, AxiosResponse<TodolistType[]>>('todo-lists');
+    return instance.get<TodolistType[]>('todo-lists');
   },
   createTodolist(title: string) {
     return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TodolistType }>>>('todo-lists', {title});
@@ -24,20 +20,20 @@ export const todolistsAPI = {
     return instance.delete<ResponseType>(`todo-lists/${id}`);
   },
   updateTodolist(id: string, title: string) {
-    return instance.put<DataType, AxiosResponse<ResponseType>>(`todo-lists/${id}`, {title: title});
+    return instance.put<{ title: string }, AxiosResponse<ResponseType>>(`todo-lists/${id}`, {title});
   },
   getTasks(todolistId: string) {
-    return instance.get<null, AxiosResponse<GetTasksResponse>>(`todo-lists/${todolistId}/tasks`);
+    return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`);
   },
   deleteTask(todolistId: string, taskId: string) {
-    return instance.delete<null, AxiosResponse<ResponseType>>(`todo-lists/${todolistId}/tasks/${taskId}`);
+    return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
   },
   createTask(todolistId: string, title: string) {
     return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks`, {title});
   },
   updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
     return instance.put<UpdateTaskModelType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
-  },
+  }
 }
 
 // types
@@ -63,11 +59,11 @@ export enum TaskStatuses {
 }
 
 export enum TaskPriorities {
-  Low ,
-  Middle ,
-  Hi ,
-  Urgently ,
-  Later ,
+  Low = 0,
+  Middle = 1,
+  Hi = 2,
+  Urgently = 3,
+  Later = 4
 }
 
 export type TaskType = {
