@@ -107,9 +107,17 @@ export const removeTodoListThunk = (todolistId: string) => (dispatch: Dispatch) 
     })
 }
 
+export type AddTDLType = {
+  title: string
+}
+
 export const addTodoListThunk = (title: string) => (dispatch: Dispatch) => {
+
+
+  let data: AddTDLType = {title}
+
   todolistsAPI
-    .createTodolist(title)
+    .createTodolist(data)
     .then((res) => {
       dispatch(addTodolistAC(res.data.data.item))
     })
