@@ -32,11 +32,11 @@ function App({demo = false}: PropsType) {
 
     useEffect(() => {
         dispatch(initializeAppTC())
-    }, [])
+    }, [dispatch])
 
     const logoutHandler = useCallback(() => {
         dispatch(logoutTC())
-    }, [])
+    }, [dispatch])
 
     if (!isInitialized) {
         return <div
