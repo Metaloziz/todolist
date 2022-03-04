@@ -23,7 +23,7 @@ const slice = createSlice({
       }
     },
     addTodolistAC(state, action: PayloadAction<{ todolist: TodolistType }>) {
-      state.push({
+      state.unshift({
         ...action.payload.todolist, filter: 'all', entityStatus: 'idle'
       })
     },
@@ -129,7 +129,7 @@ console.log(changeTodolistFilterAC.type);
 
 // thunks
 export const fetchTodolistsTC = () => {
-  return (dispatch: ThunkDispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch(setAppStatusAC({status: 'loading'}))
     todolistsAPI.getTodolists()
       .then((res) => {
@@ -142,7 +142,7 @@ export const fetchTodolistsTC = () => {
   }
 }
 export const removeTodolistTC = (todolistId: string) => {
-  return (dispatch: ThunkDispatch) => {
+  return (dispatch: Dispatch) => {
     //изменим глобальный статус приложения, чтобы вверху полоса побежала
     dispatch(setAppStatusAC({status: 'loading'}))
     //изменим статус конкретного тудулиста, чтобы он мог задизеблить что надо
@@ -156,7 +156,7 @@ export const removeTodolistTC = (todolistId: string) => {
   }
 }
 export const addTodolistTC = (title: string) => {
-  return (dispatch: ThunkDispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch(setAppStatusAC({status: 'loading'}))
     todolistsAPI.createTodolist(title)
       .then((res) => {
