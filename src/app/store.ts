@@ -14,6 +14,9 @@ const rootReducer = combineReducers({
   app: appReducer,
   auth: authReducer
 })
+
+export type RootReducerType = typeof rootReducer
+
 // непосредственно создаём store
 // export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
