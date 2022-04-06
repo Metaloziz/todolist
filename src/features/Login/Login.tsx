@@ -4,7 +4,7 @@ import {useFormik} from 'formik'
 import {useDispatch, useSelector} from 'react-redux'
 import {loginTC} from './auth-reducer'
 import {AppRootStateType} from '../../app/store'
-import { Redirect } from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 
 export const Login = () => {
     const dispatch = useDispatch()
@@ -36,7 +36,7 @@ export const Login = () => {
     })
 
     if (isLoggedIn) {
-        return <Redirect to={"/"} />
+        return <Navigate to="/" />;
     }
 
 

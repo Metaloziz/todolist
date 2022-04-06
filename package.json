@@ -1,6 +1,5 @@
 {
-  "name": "todolist",
-  "homepage": "https://Metaloziz.github.io/todolist",
+  "name": "it-incubator-todolist-ts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,19 +14,17 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
     "@types/uuid": "^7.0.3",
     "axios": "^0.19.2",
     "formik": "^2.1.5",
-    "gh-pages": "^3.2.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "typescript": "^4.6.3",
+    "typescript": "^4.1.2",
     "uuid": "^8.0.0"
   },
   "scripts": {
@@ -38,9 +35,7 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "jest:integration": "jest -c integration/jest.config.js",
-    "test:integration": "start-server-and-test storybook http-get://localhost:9009 jest:integration",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "test:integration": "start-server-and-test storybook http-get://localhost:9009 jest:integration"
   },
   "eslintConfig": {
     "extends": "react-app"
