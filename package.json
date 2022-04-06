@@ -1,6 +1,6 @@
 {
-  "name": "it-incubator-todolist-ts",
-  "homepage": "https://Metaloziz.github.io/it-incubator-todolist-ts",
+  "name": "todolist",
+  "homepage": "https://Metaloziz.github.io/todolist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
