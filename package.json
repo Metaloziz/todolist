@@ -1,7 +1,6 @@
 {
-  "name": "todolist",
+  "name": "it-incubator-todolist-ts",
   "version": "0.1.0",
-  "homepage": "https://Metaloziz.github.io/todolist",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.1",
@@ -19,7 +18,6 @@
     "@types/uuid": "^7.0.3",
     "axios": "^0.19.2",
     "formik": "^2.1.5",
-    "gh-pages": "^3.2.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -32,8 +30,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
