@@ -6,7 +6,6 @@ import {loginTC} from './auth-reducer'
 import {AppRootStateType} from '../../app/store'
 import { Redirect } from 'react-router-dom'
 
-
 export const Login = () => {
     const dispatch = useDispatch()
 
@@ -24,6 +23,7 @@ export const Login = () => {
                     password: 'Password is required'
                 }
             }
+
         },
         initialValues: {
             email: '',
@@ -38,6 +38,7 @@ export const Login = () => {
     if (isLoggedIn) {
         return <Redirect to={"/"} />
     }
+
 
     return <Grid container justify="center">
         <Grid item xs={4}>

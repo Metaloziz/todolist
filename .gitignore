@@ -4,11 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-.idea
-.storybook
+
 # testing
 /coverage
-.env
 
 # production
 /build
