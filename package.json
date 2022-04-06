@@ -1,7 +1,7 @@
 {
   "name": "it-incubator-todolist-ts",
   "version": "0.1.0",
-  "homepage": "https://serjge.github.io/todolist",
+  "homepage": "https://Metaloziz.github.io/todolist",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.1",
