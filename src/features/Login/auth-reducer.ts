@@ -1,10 +1,10 @@
 import {Dispatch} from 'redux'
-import {setAppStatusAC} from '../../app/app-reducer'
-import {authAPI, LoginParamsType} from '../../api/todolists-api'
+import {setAppStatusAC} from 'app/app-reducer'
+import {authAPI, LoginParamsType} from 'api/todolists-api'
 import {
   handleServerAppError,
   handleServerNetworkError
-} from '../../utils/error-utils'
+} from 'utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState = {
@@ -15,8 +15,8 @@ const slice = createSlice({
   name: 'Auth',
   initialState: initialState,
   reducers: {
-    setIsLoggedInAC(state, action: PayloadAction<{ value: boolean }>) {
-      state.isLoggedIn = action.payload.value
+    setIsLoggedInAC(state, action: PayloadAction<{ isLoggedIn: boolean }>) {
+      state.isLoggedIn = action.payload.isLoggedIn
     }
   }
 })
@@ -28,12 +28,12 @@ export const {setIsLoggedInAC} = slice.actions
 
 // thunks
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
-  dispatch(setAppStatusAC('loading'))
+  dispatch(setAppStatusAC({status: "loading"}))
   authAPI.login(data)
     .then(res => {
       if (res.data.resultCode === 0) {
-        dispatch(setIsLoggedInAC({value: true}))
-        dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsLoggedInAC({isLoggedIn: true}))
+        dispatch(setAppStatusAC({status: 'succeeded'}))
       } else {
         handleServerAppError(res.data, dispatch)
       }
@@ -43,12 +43,12 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
     })
 }
 export const logoutTC = () => (dispatch: Dispatch) => {
-  dispatch(setAppStatusAC('loading'))
+  dispatch(setAppStatusAC({status: 'loading'}))
   authAPI.logout()
     .then(res => {
       if (res.data.resultCode === 0) {
-        dispatch(setIsLoggedInAC({value: false}))
-        dispatch(setAppStatusAC('succeeded'))
+        dispatch(setIsLoggedInAC({isLoggedIn: false}))
+        dispatch(setAppStatusAC({status: 'succeeded'}))
       } else {
         handleServerAppError(res.data, dispatch)
       }
@@ -57,12 +57,3 @@ export const logoutTC = () => (dispatch: Dispatch) => {
       handleServerNetworkError(error, dispatch)
     })
 }
-
-// types
-
-// type ActionsType = ReturnType<typeof setIsLoggedInAC>
-// type InitialStateType = {
-//   isLoggedIn: boolean
-// }
-
-// type ThunkDispatch = Dispatch<ActionsType | SetAppStatusActionType | SetAppErrorActionType>

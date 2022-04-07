@@ -6,8 +6,8 @@ import {
 } from 'app/app-reducer'
 
 let startState: InitialStateType;
-let newStatus: RequestStatusType
-let someError: string
+let status: RequestStatusType
+let error: string
 let isInitialized: boolean
 
 beforeEach(() => {
@@ -16,33 +16,35 @@ beforeEach(() => {
     error: null,
     status: 'idle'
   }
-  newStatus = "loading"
-  someError = "Big Error Message"
+  status = "loading"
+  error = "Big Error Message"
   isInitialized = true
 })
+
 describe('app-reducer', () => {
 
   test('correct status should be set', () => {
 
-    const endState = appReducer(startState, setAppStatusAC(newStatus))
+    const action = setAppStatusAC({status});
+    const endState = appReducer(startState, action)
 
-    expect(endState.status).toBe(newStatus);
+    expect(endState.status).toBe(status);
   })
 
   test('correct error message should be set', () => {
 
-    const endState = appReducer(startState, setAppErrorAC(someError))
+    const action = setAppErrorAC({error});
+    const endState = appReducer(startState, action)
 
-    expect(endState.error).toBe(someError);
+    expect(endState.error).toBe(error);
   })
 
   test('set initialize status', () => {
 
-    const endState = appReducer(startState, setAppInitializedAC(isInitialized))
+    const action = setAppInitializedAC({isInitialized});
+    const endState = appReducer(startState, action)
 
     expect(endState.isInitialized).toBe(isInitialized);
-
   })
-
 })
 

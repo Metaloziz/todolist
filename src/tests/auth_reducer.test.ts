@@ -18,7 +18,7 @@ describe('auth-reducer', () => {
 
   test('set is login in', () => {
 
-    let action = setIsLoggedInAC({value: newIsLoginValue})
+    let action = setIsLoggedInAC({isInitialized: newIsLoginValue})
 
     let endState = authReducer(initialState, action)
 
