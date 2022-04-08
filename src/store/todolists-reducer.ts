@@ -5,7 +5,7 @@ import {
   SetAppErrorActionType,
   setAppStatusAC,
   SetAppStatusActionType
-} from 'app/app-reducer'
+} from 'store/app-reducer'
 import {handleServerNetworkError} from 'utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import produce from "immer"

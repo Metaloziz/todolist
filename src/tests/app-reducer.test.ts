@@ -3,7 +3,7 @@ import {
   InitialStateType, RequestStatusType,
   setAppErrorAC, setAppInitializedAC,
   setAppStatusAC
-} from 'app/app-reducer'
+} from 'store/app-reducer'
 
 let startState: InitialStateType;
 let status: RequestStatusType

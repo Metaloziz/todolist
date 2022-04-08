@@ -1,4 +1,4 @@
-import {addTodolistAC, removeTodolistAC, setTodolistsAC} from './todolists-reducer'
+import {addTodolistAC, removeTodolistAC, setTodolistsAC} from 'store/todolists-reducer'
 import {
   TaskPriorities,
   TaskStatuses,
@@ -7,8 +7,8 @@ import {
   UpdateTaskModelType
 } from 'api/todolists-api'
 import {Dispatch} from 'redux'
-import {AppRootStateType} from 'app/store'
-import {setAppStatusAC} from 'app/app-reducer'
+import {AppRootStateType} from 'store/store'
+import {setAppStatusAC} from 'store/app-reducer'
 import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 

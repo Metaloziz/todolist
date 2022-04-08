@@ -1,4 +1,4 @@
-import {authReducer, setIsLoggedInAC} from "features/Login/auth-reducer";
+import {authReducer, setIsLoggedInAC} from "store/auth-reducer";
 //
 // type InitialStateType = {
 //   isLoggedIn: boolean

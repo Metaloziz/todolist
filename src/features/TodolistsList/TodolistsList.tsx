@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from 'app/store'
+import {AppRootStateType} from 'store/store'
 import {
   addTodolistTC,
   changeTodolistFilterAC,
@@ -9,8 +9,8 @@ import {
   FilterValuesType,
   removeTodolistTC,
   TodolistDomainType
-} from './todolists-reducer'
-import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from './tasks-reducer'
+} from 'store/todolists-reducer'
+import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from 'store/tasks-reducer'
 import {TaskStatuses} from 'api/todolists-api'
 import {Grid, Paper} from '@material-ui/core'
 import {AddItemForm} from 'components/AddItemForm/AddItemForm'

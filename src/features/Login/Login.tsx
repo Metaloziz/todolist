@@ -11,8 +11,8 @@ import {
 } from '@material-ui/core'
 import {useFormik} from 'formik'
 import {useDispatch, useSelector} from 'react-redux'
-import {loginTC} from './auth-reducer'
-import {AppRootStateType} from 'app/store'
+import {loginTC} from 'store/auth-reducer'
+import {AppRootStateType} from 'store/store'
 import {Navigate} from 'react-router-dom'
 
 export const Login = () => {

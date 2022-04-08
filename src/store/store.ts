@@ -1,9 +1,9 @@
-import {tasksReducer} from 'features/TodolistsList/tasks-reducer';
-import {todolistsReducer} from 'features/TodolistsList/todolists-reducer';
+import {tasksReducer} from 'store/tasks-reducer';
+import {todolistsReducer} from 'store/todolists-reducer';
 import {combineReducers} from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import {appReducer} from './app-reducer'
-import {authReducer} from 'features/Login/auth-reducer'
+import {appReducer} from 'store/app-reducer'
+import {authReducer} from 'store/auth-reducer'
 import {configureStore} from "@reduxjs/toolkit";
 
 // объединяя reducer-ы с помощью combineReducers,

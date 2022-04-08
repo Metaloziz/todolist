@@ -3,7 +3,7 @@ import {
   SetAppErrorActionType,
   setAppStatusAC,
   SetAppStatusActionType
-} from 'app/app-reducer'
+} from 'store/app-reducer'
 import {ResponseType} from 'api/todolists-api'
 import {Dispatch} from 'redux'
 
