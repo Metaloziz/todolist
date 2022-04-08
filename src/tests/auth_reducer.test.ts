@@ -8,21 +8,21 @@ const initialState = {
   isLoggedIn: false
 }
 
-let newIsLoginValue: boolean
+let isLoggedIn: boolean
 
 beforeEach(() => {
-  newIsLoginValue = true
+  isLoggedIn = true
 })
 
 describe('auth-reducer', () => {
 
   test('set is login in', () => {
 
-    let action = setIsLoggedInAC({isInitialized: newIsLoginValue})
+    let action = setIsLoggedInAC({ isLoggedIn})
 
     let endState = authReducer(initialState, action)
 
     expect(initialState).not.toBe(endState)
-    expect(endState.isLoggedIn).toBe(newIsLoginValue)
+    expect(endState.isLoggedIn).toBe(isLoggedIn)
   })
 })
