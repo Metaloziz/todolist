@@ -10,7 +10,12 @@ import {
   removeTodolistTC,
   TodolistDomainType
 } from 'store/todolists-reducer'
-import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from 'store/tasks-reducer'
+import {
+  addTaskTC,
+  removeTaskTC,
+  TasksStateType,
+  updateTaskTC
+} from 'store/tasks-reducer'
 import {TaskStatuses} from 'api/todolists-api'
 import {Grid, Paper} from '@material-ui/core'
 import {AddItemForm} from 'components/AddItemForm/AddItemForm'
@@ -34,42 +39,42 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     }
     const thunk = fetchTodolistsTC()
     dispatch(thunk)
-  }, [])
+  }, [demo, dispatch, isLoggedIn])
 
-  const removeTask = useCallback(function (id: string, todolistId: string) {
-    const thunk = removeTaskTC(id, todolistId)
+  const removeTask = useCallback(function (taskId: string, todolistId: string) {
+    const thunk = removeTaskTC({taskId, todolistId})
     dispatch(thunk)
-  }, [])
+  }, [dispatch])
 
   const addTask = useCallback(function (title: string, todolistId: string) {
-    const thunk = addTaskTC(title, todolistId)
+    const thunk = addTaskTC({title, todolistId})
     dispatch(thunk)
-  }, [])
+  }, [dispatch])
 
-  const changeStatus = useCallback(function (id: string, status: TaskStatuses, todolistId: string) {
-    const thunk = updateTaskTC(id, {status}, todolistId)
+  const changeStatus = useCallback(function (taskId: string, status: TaskStatuses, todolistId: string) {
+    const thunk = updateTaskTC({taskId, domainModel: {status}, todolistId})
     dispatch(thunk)
-  }, [])
+  }, [dispatch])
 
-  const changeTaskTitle = useCallback(function (id: string, newTitle: string, todolistId: string) {
-    const thunk = updateTaskTC(id, {title: newTitle}, todolistId)
+  const changeTaskTitle = useCallback(function (taskId: string, title: string, todolistId: string) {
+    const thunk = updateTaskTC({taskId, domainModel: {title}, todolistId})
     dispatch(thunk)
-  }, [])
+  }, [dispatch])
 
   const changeFilter = useCallback(function (value: FilterValuesType, todolistId: string) {
     const action = changeTodolistFilterAC({id: todolistId, filter: value})
     dispatch(action)
-  }, [])
+  }, [dispatch])
 
   const removeTodolist = useCallback(function (id: string) {
     const thunk = removeTodolistTC(id)
     dispatch(thunk)
-  }, [])
+  }, [dispatch])
 
   const changeTodolistTitle = useCallback(function (id: string, title: string) {
     const thunk = changeTodolistTitleTC(id, title)
     dispatch(thunk)
-  }, [])
+  }, [dispatch])
 
   const addTodolist = useCallback((title: string) => {
     const thunk = addTodolistTC(title)

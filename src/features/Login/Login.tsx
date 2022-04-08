@@ -57,7 +57,9 @@ export const Login = () => {
             <p>
               To log in get registered <a
               href={'https://social-network.samuraijs.com/'}
-              target={'_blank'}>here</a>
+              target={'_blank'}
+              rel="noopener noreferrer"
+            >here</a>
             </p>
             <p>
               or use common test account credentials:

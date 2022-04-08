@@ -1,14 +1,8 @@
 import {todolistsAPI, TodolistType} from 'api/todolists-api'
 import {Dispatch} from 'redux'
-import {
-  RequestStatusType,
-  SetAppErrorActionType,
-  setAppStatusAC,
-  SetAppStatusActionType
-} from 'store/app-reducer'
+import {RequestStatusType, setAppStatusAC} from 'store/app-reducer'
 import {handleServerNetworkError} from 'utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import produce from "immer"
 
 const initialState: Array<TodolistDomainType> = []
 
@@ -95,6 +89,7 @@ export const removeTodolistTC = (todolistId: string) => {
         dispatch(removeTodolistAC({id: todolistId}))
         //скажем глобально приложению, что асинхронная операция завершена
         dispatch(setAppStatusAC({status: 'succeeded'}))
+        console.log(res)
       })
   }
 }
@@ -113,6 +108,7 @@ export const changeTodolistTitleTC = (id: string, title: string) => {
     todolistsAPI.updateTodolist(id, title)
       .then((res) => {
         dispatch(changeTodolistTitleAC({id, title}))
+        console.log(res)
       })
   }
 }
