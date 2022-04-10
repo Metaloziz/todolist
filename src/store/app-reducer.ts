@@ -1,13 +1,26 @@
-import {Dispatch} from 'redux'
 import {authAPI} from 'api/todolists-api'
 import {setIsLoggedInAC} from 'store/auth-reducer'
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: InitialStateType = {
   status: 'idle',
   error: null,
   isInitialized: false
 }
+
+export const initializeAppTC = createAsyncThunk('App/initializeAppTC', async (params, {dispatch}) => {
+
+  try {
+    const res = await authAPI.me()
+    if (res.data.resultCode === 0) {
+      dispatch(setIsLoggedInAC({isLoggedIn: true}));
+    } else {
+
+    }
+  } catch (e) {
+
+  }
+})
 
 const slice = createSlice({
   name: 'App',
@@ -16,17 +29,19 @@ const slice = createSlice({
     setAppStatusAC(state, action: PayloadAction<{ status: RequestStatusType }>) {
       state.status = action.payload.status
     },
-    setAppInitializedAC(state, action: PayloadAction<{ isInitialized: boolean }>) {
-      state.isInitialized = action.payload.isInitialized
-    },
     setAppErrorAC(state, action: PayloadAction<{ error: string | null }>) {
       state.error = action.payload.error
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(initializeAppTC.fulfilled, (state) => {
+      state.isInitialized = true
+    })
   }
 })
 
 export const appReducer = slice.reducer
-export const {setAppStatusAC, setAppInitializedAC, setAppErrorAC} = slice.actions
+export const {setAppStatusAC, setAppErrorAC} = slice.actions
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {
@@ -36,17 +51,6 @@ export type InitialStateType = {
   error: string | null
   // true когда приложение проинициализировалось (проверили юзера, настройки получили и т.д.)
   isInitialized: boolean
-}
-
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-  authAPI.me().then(res => {
-    if (res.data.resultCode === 0) {
-      dispatch(setIsLoggedInAC({isLoggedIn: true}));
-    } else {
-
-    }
-    dispatch(setAppInitializedAC({isInitialized: true}));
-  })
 }
 
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
