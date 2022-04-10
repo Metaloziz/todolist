@@ -5,19 +5,45 @@ import {
   handleServerAppError,
   handleServerNetworkError
 } from 'utils/error-utils'
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AxiosError} from "axios";
 
-const initialState = {
-  isLoggedIn: false
-}
+
+export const loginTC = createAsyncThunk('auth/loginTC', async (data: LoginParamsType, {dispatch,rejectWithValue}) => {
+  dispatch(setAppStatusAC({status: "loading"}))
+  try {
+    const res = await authAPI.login(data)
+
+    if (res.data.resultCode === 0) {
+      dispatch(setAppStatusAC({status: 'succeeded'}))
+      return {isLoggedIn: true}
+    } else {
+      handleServerAppError(res.data, dispatch)
+      return rejectWithValue({isLoggedIn: false}) // это из toolkit
+    }
+  } catch (error) {
+    const {message} = error as AxiosError
+    handleServerNetworkError({message}, dispatch)
+    return rejectWithValue({isLoggedIn: false})
+  }
+})
+
+// thunks
 
 const slice = createSlice({
   name: 'Auth',
-  initialState: initialState,
+  initialState: {
+    isLoggedIn: false
+  },
   reducers: {
     setIsLoggedInAC(state, action: PayloadAction<{ isLoggedIn: boolean }>) {
-      state.isLoggedIn = action.payload.isLoggedIn
+      state.isLoggedIn = action.payload.isLoggedIn // пока оставим, хоть и продублировали код в кейсе ниже
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(loginTC.fulfilled, (state, action) => {
+        state.isLoggedIn = action.payload.isLoggedIn
+    })
   }
 })
 
@@ -26,22 +52,6 @@ export const authReducer = slice.reducer
 export const {setIsLoggedInAC} = slice.actions
 
 
-// thunks
-export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
-  dispatch(setAppStatusAC({status: "loading"}))
-  authAPI.login(data)
-    .then(res => {
-      if (res.data.resultCode === 0) {
-        dispatch(setIsLoggedInAC({isLoggedIn: true}))
-        dispatch(setAppStatusAC({status: 'succeeded'}))
-      } else {
-        handleServerAppError(res.data, dispatch)
-      }
-    })
-    .catch((error) => {
-      handleServerNetworkError(error, dispatch)
-    })
-}
 export const logoutTC = () => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC({status: 'loading'}))
   authAPI.logout()

@@ -39,8 +39,9 @@ export const Login = () => {
       password: '',
       rememberMe: false
     },
-    onSubmit: values => {
-      dispatch(loginTC(values));
+    onSubmit: async (inputs, formikHelpers) => {
+      const res = await dispatch(loginTC(inputs));
+      formikHelpers.setFieldError('email', 'fakeError')
     },
   })
 
