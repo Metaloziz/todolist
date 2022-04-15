@@ -1,16 +1,16 @@
-import React, { FC, memo, useCallback, useEffect } from "react";
+import React, { FC, memo, useCallback, useEffect } from 'react'
 
-import { Button, IconButton } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
-import { useDispatch } from "react-redux";
+import { Button, IconButton } from '@material-ui/core'
+import { Delete } from '@material-ui/icons'
+import { useDispatch } from 'react-redux'
 
-import { Task } from "./Task/Task";
+import { Task } from './Task/Task'
 
-import { AddItemForm } from "components/AddItemForm/AddItemForm";
-import { EditableSpan } from "components/EditableSpan/EditableSpan";
-import { TasksFilter, TaskStatuses } from "enums/enums";
-import { fetchTasksTC } from "store/tasks-reducer";
-import { TodoListType } from "types/components";
+import { AddItemForm } from 'components/AddItemForm/AddItemForm'
+import { EditableSpan } from 'components/EditableSpan/EditableSpan'
+import { TasksFilter, TaskStatuses } from 'enums/enums'
+import { fetchTasksTC } from 'store/tasks-reducer'
+import { TodoListType } from 'types/components'
 
 export const Todolist: FC<TodoListType> = memo(({ demo = false, ...props }) => {
   const dispatch = useDispatch()
@@ -20,13 +20,13 @@ export const Todolist: FC<TodoListType> = memo(({ demo = false, ...props }) => {
     }
     const thunk = fetchTasksTC(props.todolist.id)
     dispatch(thunk)
-  }, [])
+  }, [demo, dispatch, props.todolist.id])
 
   const addTask = useCallback(
     (title: string) => {
       props.addTask(title, props.todolist.id)
     },
-    [props.addTask, props.todolist.id],
+    [props],
   )
 
   const removeTodolist = (): void => {
@@ -36,20 +36,20 @@ export const Todolist: FC<TodoListType> = memo(({ demo = false, ...props }) => {
     (title: string) => {
       props.changeTodolistTitle(props.todolist.id, title)
     },
-    [props.todolist.id, props.changeTodolistTitle],
+    [props],
   )
 
   const onAllClickHandler = useCallback(
     () => props.changeFilter(TasksFilter.All, props.todolist.id),
-    [props.todolist.id, props.changeFilter],
+    [props],
   )
   const onActiveClickHandler = useCallback(
     () => props.changeFilter(TasksFilter.Active, props.todolist.id),
-    [props.todolist.id, props.changeFilter],
+    [props],
   )
   const onCompletedClickHandler = useCallback(
     () => props.changeFilter(TasksFilter.Completed, props.todolist.id),
-    [props.todolist.id, props.changeFilter],
+    [props],
   )
 
   let tasksForTodolist = props.tasks
@@ -92,21 +92,21 @@ export const Todolist: FC<TodoListType> = memo(({ demo = false, ...props }) => {
         <Button
           variant={props.todolist.filter === TasksFilter.All ? 'outlined' : 'text'}
           onClick={onAllClickHandler}
-          color="default"
+          color='default'
         >
           All
         </Button>
         <Button
           variant={props.todolist.filter === TasksFilter.Active ? 'outlined' : 'text'}
           onClick={onActiveClickHandler}
-          color="primary"
+          color='primary'
         >
           Active
         </Button>
         <Button
           variant={props.todolist.filter === TasksFilter.Completed ? 'outlined' : 'text'}
           onClick={onCompletedClickHandler}
-          color="secondary"
+          color='secondary'
         >
           Completed
         </Button>

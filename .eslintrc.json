@@ -24,6 +24,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "prefer-regex-literals": false,
     "semi": "off",
     "no-shadow": "off",
     "no-alert": "error",
@@ -33,7 +34,7 @@
     "no-magic-numbers": "off",
     "no-param-reassign": "off",
     "default-param-last": "off",
-    "no-use-before-define": "warn",
+    "no-use-before-define": "off",
     "react/jsx-props-no-spreading": "off",
     "no-multiple-empty-lines": [
       "error",

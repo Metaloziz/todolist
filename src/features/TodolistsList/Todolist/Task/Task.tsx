@@ -1,17 +1,17 @@
-import React, { ChangeEvent, FC, memo, useCallback } from "react";
+import React, { ChangeEvent, FC, memo, useCallback } from 'react'
 
-import { Checkbox, IconButton } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
+import { Checkbox, IconButton } from '@material-ui/core'
+import { Delete } from '@material-ui/icons'
 
-import { EditableSpan } from "components/EditableSpan/EditableSpan";
-import { TaskStatuses } from "enums/enums";
-import { TaskPropsType } from "types/components";
+import { EditableSpan } from 'components/EditableSpan/EditableSpan'
+import { TaskStatuses } from 'enums/enums'
+import { TaskPropsType } from 'types/components'
 
 export const Task: FC<TaskPropsType> = memo(
   ({ task, removeTask, todolistId, changeTaskStatus, changeTaskTitle }) => {
     const onClickHandler = useCallback(
       () => removeTask(task.id, todolistId),
-      [task.id, todolistId],
+      [task.id, todolistId, removeTask],
     )
 
     const onChangeHandler = useCallback(
@@ -23,14 +23,14 @@ export const Task: FC<TaskPropsType> = memo(
           todolistId,
         )
       },
-      [task.id, todolistId],
+      [task.id, todolistId, changeTaskStatus],
     )
 
     const onTitleChangeHandler = useCallback(
       (newValue: string) => {
         changeTaskTitle(task.id, newValue, todolistId)
       },
-      [task.id, todolistId],
+      [task.id, todolistId, changeTaskTitle],
     )
 
     return (
@@ -40,7 +40,7 @@ export const Task: FC<TaskPropsType> = memo(
       >
         <Checkbox
           checked={task.status === TaskStatuses.Completed}
-          color="primary"
+          color='primary'
           onChange={onChangeHandler}
         />
 
