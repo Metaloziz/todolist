@@ -1,11 +1,12 @@
 import {
-  appReducer, initializeAppTC,
-  InitialStateType, RequestStatusType,
+  appReducer,
+  initializeAppTC,
   setAppErrorAC,
   setAppStatusAC
-} from 'store/app-reducer'
+} from "store/app-reducer";
+import { InitialStateType, RequestStatusType } from "types/appReducerType";
 
-let startState: InitialStateType;
+let startState: InitialStateType
 let status: RequestStatusType
 let error: string
 let isInitialized: boolean
@@ -14,38 +15,32 @@ beforeEach(() => {
   startState = {
     isInitialized: false,
     error: null,
-    status: 'idle'
+    status: 'idle',
   }
-  status = "loading"
-  error = "Big Error Message"
+  status = 'loading'
+  error = 'Big Error Message'
   isInitialized = true
 })
 
 describe('app-reducer', () => {
-
   test('correct status should be set', () => {
-
-    const action = setAppStatusAC({status});
+    const action = setAppStatusAC({ status })
     const endState = appReducer(startState, action)
 
-    expect(endState.status).toBe(status);
+    expect(endState.status).toBe(status)
   })
 
   test('correct error message should be set', () => {
-
-    const action = setAppErrorAC({error});
+    const action = setAppErrorAC({ error })
     const endState = appReducer(startState, action)
 
-    expect(endState.error).toBe(error);
+    expect(endState.error).toBe(error)
   })
 
   test('set initialize status', () => {
-
-
-    const action = initializeAppTC.fulfilled(undefined, '', {isInitialized});
+    const action = initializeAppTC.fulfilled(undefined, '', { isInitialized })
     const endState = appReducer(startState, action)
 
-    expect(endState.isInitialized).toBe(isInitialized);
+    expect(endState.isInitialized).toBe(isInitialized)
   })
 })
-

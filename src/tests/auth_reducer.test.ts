@@ -1,7 +1,7 @@
-import {authReducer, setIsLoggedInAC} from "store/auth-reducer";
+import { authReducer, setIsLoggedInAC } from "store/auth-reducer";
 
 const initialState = {
-  isLoggedIn: false
+  isLoggedIn: false,
 }
 
 let isLoggedIn: boolean
@@ -11,12 +11,10 @@ beforeEach(() => {
 })
 
 describe('auth-reducer', () => {
-
   test('set is login in', () => {
+    const action = setIsLoggedInAC({ isLoggedIn })
 
-    let action = setIsLoggedInAC({ isLoggedIn})
-
-    let endState = authReducer(initialState, action)
+    const endState = authReducer(initialState, action)
 
     expect(initialState).not.toBe(endState)
     expect(endState.isLoggedIn).toBe(isLoggedIn)
