@@ -1,7 +1,7 @@
 import {
-  addTodolistAC,
-  removeTodolistAC,
-  setTodolistsAC
+  addTodolistTC,
+  fetchTodolistsTC,
+  removeTodolistTC,
 } from 'store/todolists-reducer'
 import {
   TaskPriorities,
@@ -59,7 +59,7 @@ type RemoveTaskTCType = {
 export const removeTaskTC = createAsyncThunk('Tasks/removeTaskTC', ({
                                                                       taskId,
                                                                       todolistId
-                                                                    }: RemoveTaskTCType, {dispatch}) => {
+                                                                    }: RemoveTaskTCType,) => {
   return todolistsAPI.deleteTask(todolistId, taskId)
     .then(res => ({taskId, todolistId}))
 })
@@ -113,16 +113,23 @@ const slice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(addTodolistAC, (state, action) => {
-      state[action.payload.todolist.id] = []
+    builder.addCase(addTodolistTC.fulfilled, (state, action) => {
+      if (action.payload) {
+        state[action.payload.todolist.id] = []
+      }
+
     })
-    builder.addCase(removeTodolistAC, (state, action) => {
-      delete state[action.payload.id]
+    builder.addCase(removeTodolistTC.fulfilled, (state, action) => {
+      if (action.payload) {
+        delete state[action.payload.id]
+      }
     })
-    builder.addCase(setTodolistsAC, (state, action) => {
-      action.payload.todolists.forEach(({id}) => {
-        state[id] = []
-      })
+    builder.addCase(fetchTodolistsTC.fulfilled, (state, action) => {
+      if (action.payload) {
+        action.payload.todolists.forEach(({id}) => {
+          state[id] = []
+        })
+      }
     })
     builder.addCase(fetchTasksTC.fulfilled, (state, action) => {
       const {todolistId, tasks} = action.payload

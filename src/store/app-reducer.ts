@@ -8,7 +8,10 @@ const initialState: InitialStateType = {
   isInitialized: false
 }
 
-export const initializeAppTC = createAsyncThunk('App/initializeAppTC', async (params: { isInitialized: boolean }, {dispatch}) => {
+export const initializeAppTC = createAsyncThunk('App/initializeAppTC', async (params: { isInitialized: boolean }, {
+  dispatch,
+  rejectWithValue
+}) => {
 
   try {
     const res = await authAPI.me()
@@ -18,7 +21,8 @@ export const initializeAppTC = createAsyncThunk('App/initializeAppTC', async (pa
 
     }
   } catch (e) {
-
+    console.warn(e)
+    return rejectWithValue({error: 'some error'})
   }
 })
 

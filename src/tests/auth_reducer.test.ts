@@ -1,8 +1,4 @@
 import {authReducer, setIsLoggedInAC} from "store/auth-reducer";
-//
-// type InitialStateType = {
-//   isLoggedIn: boolean
-// }
 
 const initialState = {
   isLoggedIn: false
