@@ -1,5 +1,5 @@
-import { TaskPriorities, TaskStatuses } from "enums/enums";
-import { TaskType } from "types/TypesAPI";
+import { TaskPriorities, TaskStatuses } from 'enums'
+import { TaskType } from 'types'
 
 export type AddTaskTCType = {
   title: string

@@ -1,10 +1,5 @@
-import {
-  appReducer,
-  initializeAppTC,
-  setAppErrorAC,
-  setAppStatusAC
-} from "store/app-reducer";
-import { InitialStateType, RequestStatusType } from "types/appReducerType";
+import { appReducer, initializeAppTC, setAppErrorAC, setAppStatusAC } from 'store'
+import { InitialStateType, RequestStatusType } from 'types'
 
 let startState: InitialStateType
 let status: RequestStatusType

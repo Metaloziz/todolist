@@ -4,13 +4,10 @@ import { Button, IconButton } from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
 import { useDispatch } from 'react-redux'
 
-import { Task } from './Task/Task'
-
-import { AddItemForm } from 'components/AddItemForm/AddItemForm'
-import { EditableSpan } from 'components/EditableSpan/EditableSpan'
-import { TasksFilter, TaskStatuses } from 'enums/enums'
-import { fetchTasksTC } from 'store/tasks-reducer'
-import { TodoListType } from 'types/components'
+import { AddItemForm, EditableSpan, Task } from 'components'
+import { TasksFilter, TaskStatuses } from 'enums'
+import { fetchTasksTC } from 'store'
+import { TodoListType } from 'types'
 
 export const Todolist: FC<TodoListType> = memo(({ demo = false, ...props }) => {
   const dispatch = useDispatch()

@@ -24,7 +24,6 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "prefer-regex-literals": false,
     "semi": "off",
     "no-shadow": "off",
     "no-alert": "error",
@@ -56,7 +55,7 @@
       }
     ],
     "@typescript-eslint/no-use-before-define": [
-      "error"
+      "off"
     ],
     "@typescript-eslint/explicit-function-return-type": [
       "error",

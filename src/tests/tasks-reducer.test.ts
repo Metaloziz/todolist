@@ -1,17 +1,15 @@
-import { CountItem, IndexElement, TaskPriorities, TaskStatuses } from "enums/enums";
+import { CountItem, IndexElement, TaskPriorities, TaskStatuses } from 'enums'
 import {
   addTaskTC,
-  fetchTasksTC,
-  removeTaskTC,
-  tasksReducer,
-  updateTaskTC
-} from "store/tasks-reducer";
-import {
   addTodolistTC,
+  fetchTasksTC,
   fetchTodolistsTC,
-  removeTodolistTC
-} from "store/todolists-reducer";
-import { TasksStateType, UpdateTaskTCType } from "types/tasksReducerType";
+  removeTaskTC,
+  removeTodolistTC,
+  tasksReducer,
+  updateTaskTC,
+} from 'store'
+import { TasksStateType, UpdateTaskTCType } from 'types'
 
 let startState: TasksStateType = {}
 let todolistId1: string

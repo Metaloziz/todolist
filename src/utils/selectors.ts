@@ -1,4 +1,4 @@
-import { AppRootStateType } from "store/store";
+import { AppRootStateType } from 'store'
 
 export const errorSnackbarSelector = (state: AppRootStateType): string | null =>
   state.app.error

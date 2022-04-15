@@ -1,15 +1,12 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-import { Provider } from "react-redux";
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
-import { v1 } from "uuid";
+import { Provider } from 'react-redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { v1 } from 'uuid'
 
-import { TaskPriorities, TaskStatuses } from "enums/enums";
-import { appReducer } from "store/app-reducer";
-import { AppRootStateType } from "store/store";
-import { tasksReducer } from "store/tasks-reducer";
-import { todolistsReducer } from "store/todolists-reducer";
+import { TaskPriorities, TaskStatuses } from 'enums'
+import { appReducer, AppRootStateType, tasksReducer, todolistsReducer } from 'store'
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,

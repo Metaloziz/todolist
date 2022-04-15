@@ -1,22 +1,22 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { todoListsAPI } from "api/todolists-api";
-import { CountItem, FindIndex, StatusCode } from "enums/enums";
-import { setAppStatusAC } from "store/app-reducer";
-import { AppRootStateType } from "store/store";
+import { todoListsAPI } from 'api'
+import { CountItem, FindIndex, StatusCode } from 'enums'
 import {
   addTodolistTC,
+  AppRootStateType,
   fetchTodolistsTC,
-  removeTodolistTC
-} from "store/todolists-reducer";
+  removeTodolistTC,
+  setAppStatusAC,
+} from 'store'
 import {
   AddTaskTCType,
   RemoveTaskTCType,
   TasksStateType,
-  UpdateTaskTCType
-} from "types/tasksReducerType";
-import { UpdateTaskModelType } from "types/TypesAPI";
-import { handleServerAppError, handleServerNetworkError } from "utils/error-utils";
+  UpdateTaskModelType,
+  UpdateTaskTCType,
+} from 'types'
+import { handleServerAppError, handleServerNetworkError } from 'utils'
 
 const initialState: TasksStateType = {}
 

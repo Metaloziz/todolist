@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
 import {
   Button,
@@ -8,15 +8,15 @@ import {
   FormGroup,
   FormLabel,
   Grid,
-  TextField
-} from "@material-ui/core";
-import { useFormik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+  TextField,
+} from '@material-ui/core'
+import { useFormik } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
-import { loginTC } from "store/auth-reducer";
-import { FormikCallBackType } from "types/components";
-import { loginSelector } from "utils/selectors";
+import { loginTC } from 'store'
+import { FormikCallBackType } from 'types'
+import { loginSelector } from 'utils'
 
 export const Login: FC = () => {
   const dispatch = useDispatch()
@@ -62,8 +62,8 @@ export const Login: FC = () => {
               <p>
                 To log in get registered{' '}
                 <a
-                  href="https://social-network.samuraijs.com/"
-                  target="_blank"
+                  href='components/Login/Login'
+                  target='_blank'
                   rel="noopener noreferrer"
                 >
                   here

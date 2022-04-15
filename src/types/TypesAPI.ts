@@ -1,4 +1,4 @@
-import { TaskPriorities, TaskStatuses } from "enums/enums";
+import { TaskPriorities, TaskStatuses } from 'enums'
 
 export type LoginParamsType = {
   email: string

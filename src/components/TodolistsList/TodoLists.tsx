@@ -1,25 +1,25 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from 'react'
 
-import { Grid, Paper } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Grid, Paper } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
-import { Todolist } from "./Todolist/Todolist";
-
-import { AddItemForm } from "components/AddItemForm/AddItemForm";
-import { TaskStatuses } from "enums/enums";
-import { AppRootStateType } from "store/store";
-import { addTaskTC, removeTaskTC, updateTaskTC } from "store/tasks-reducer";
+import { AddItemForm, Todolist } from 'components'
+import { TaskStatuses } from 'enums'
+import { addTaskTC, AppRootStateType, removeTaskTC, updateTaskTC } from 'store'
 import {
   addTodolistTC,
   changeTodolistFilterAC,
   changeTodolistTitleTC,
   fetchTodolistsTC,
-  removeTodolistTC
-} from "store/todolists-reducer";
-import { TodoListsType } from "types/components";
-import { TasksStateType } from "types/tasksReducerType";
-import { FilterValuesType, TodolistDomainType } from "types/todoListReducerType";
+  removeTodolistTC,
+} from 'store/todolists-reducer'
+import {
+  FilterValuesType,
+  TasksStateType,
+  TodolistDomainType,
+  TodoListsType,
+} from 'types'
 
 export const TodoLists: FC<TodoListsType> = ({ demo = false }) => {
   const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(

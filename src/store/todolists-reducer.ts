@@ -1,16 +1,16 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AxiosError } from 'axios'
 
-import { todoListsAPI } from "api/todolists-api";
-import { CountItem, FindIndex } from "enums/enums";
-import { setAppStatusAC } from "store/app-reducer";
-import { RequestStatusType } from "types/appReducerType";
+import { todoListsAPI } from 'api'
+import { CountItem, FindIndex } from 'enums'
+import { setAppStatusAC } from 'store'
 import {
   ChangeTodolistTitleTCType,
   FilterValuesType,
-  TodolistDomainType
-} from "types/todoListReducerType";
-import { handleServerNetworkError } from "utils/error-utils";
+  RequestStatusType,
+  TodolistDomainType,
+} from 'types'
+import { handleServerNetworkError } from 'utils'
 
 const initialState: Array<TodolistDomainType> = []
 

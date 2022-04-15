@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios'
 
-import { Paths } from "enums/enums";
+import { Paths } from 'enums'
 import {
   GetTasksResponse,
   LoginParamsType,
   ResponseType,
   TaskType,
   TodolistType,
-  UpdateTaskModelType
-} from "types/TypesAPI";
+  UpdateTaskModelType,
+} from 'types'
 
 const settings = {
   withCredentials: true,

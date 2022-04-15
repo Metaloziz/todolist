@@ -15,14 +15,9 @@ import { Menu } from '@material-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar'
-import { Login } from 'features/Login/Login'
-import { TodoLists } from 'features/TodolistsList/TodoLists'
-import { initializeAppTC } from 'store/app-reducer'
-import { logoutTC } from 'store/auth-reducer'
-import { AppRootStateType } from 'store/store'
-import { AppType } from 'types/components'
-import { RequestStatusType } from 'types/appReducerType'
+import { ErrorSnackbar, Login, TodoLists } from 'components'
+import { AppRootStateType, initializeAppTC, logoutTC } from 'store'
+import { AppType, RequestStatusType } from 'types'
 
 export const App: FC<AppType> = ({ demo = false }) => {
   const status = useSelector<AppRootStateType, RequestStatusType>(
@@ -80,4 +75,3 @@ export const App: FC<AppType> = ({ demo = false }) => {
     </div>
   )
 }
-

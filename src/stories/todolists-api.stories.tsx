@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from 'react'
 
-import { todoListsAPI } from "api/todolists-api";
-import { PriorityToDoList, StatusToDoList } from "enums/enums";
+import { todoListsAPI } from 'api'
+import { PriorityToDoList, StatusToDoList } from 'enums'
 
 export const GetTodolists: FC = () => {
   const [state, setState] = useState<any>(null)

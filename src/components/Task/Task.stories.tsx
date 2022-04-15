@@ -1,14 +1,13 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-import { action } from "@storybook/addon-actions";
+import { action } from '@storybook/addon-actions'
 
-import { Task } from "./Task";
-
-import { TaskPriorities, TaskStatuses } from "enums/enums";
+import { Task } from 'components/Task/Task'
+import { TaskPriorities, TaskStatuses } from 'enums/enums'
 
 export default {
-  title: 'Task Stories',
-  component: Task,
+    title: 'Task Stories',
+    component: Task,
 }
 
 const removeCallback = action('Remove Button inside Task clicked')

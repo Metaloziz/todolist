@@ -1,6 +1,5 @@
-import { TaskStatuses } from "enums/enums";
-import { FilterValuesType, TodolistDomainType } from "types/todoListReducerType";
-import { TaskType } from "types/TypesAPI";
+import { TaskStatuses } from 'enums'
+import { FilterValuesType, TaskType, TodolistDomainType } from 'types'
 
 export type AddItemFormPropsType = {
   addItem: (title: string) => void

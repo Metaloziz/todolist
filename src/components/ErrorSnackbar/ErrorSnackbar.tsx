@@ -1,14 +1,14 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { useDispatch, useSelector } from "react-redux";
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { setAppErrorAC } from "store/app-reducer";
-import { errorSnackbarSelector } from "utils/selectors";
+import { setAppErrorAC } from 'store'
+import { errorSnackbarSelector } from 'utils'
 
 const Alert: FC<AlertProps> = props => (
-  <MuiAlert elevation={6} variant="filled" {...props} />
+  <MuiAlert elevation={6} variant='filled' {...props} />
 )
 
 export const ErrorSnackbar: FC = () => {

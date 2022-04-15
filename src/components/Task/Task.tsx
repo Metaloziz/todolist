@@ -3,9 +3,9 @@ import React, { ChangeEvent, FC, memo, useCallback } from 'react'
 import { Checkbox, IconButton } from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
 
-import { EditableSpan } from 'components/EditableSpan/EditableSpan'
-import { TaskStatuses } from 'enums/enums'
-import { TaskPropsType } from 'types/components'
+import { EditableSpan } from 'components'
+import { TaskStatuses } from 'enums'
+import { TaskPropsType } from 'types'
 
 export const Task: FC<TaskPropsType> = memo(
   ({ task, removeTask, todolistId, changeTaskStatus, changeTaskTitle }) => {

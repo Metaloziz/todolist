@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { authAPI } from "api/todolists-api";
-import { StatusCode } from "enums/enums";
-import { setIsLoggedInAC } from "store/auth-reducer";
-import { InitialStateType, RequestStatusType } from "types/appReducerType";
+import { authAPI } from 'api'
+import { StatusCode } from 'enums'
+import { setIsLoggedInAC } from 'store'
+import { InitialStateType, RequestStatusType } from 'types'
 
 const initialState: InitialStateType = {
   status: 'idle',

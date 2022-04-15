@@ -1,11 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
-import thunkMiddleware from "redux-thunk";
+import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 
-import { appReducer } from "store/app-reducer";
-import { authReducer } from "store/auth-reducer";
-import { tasksReducer } from "store/tasks-reducer";
-import { todolistsReducer } from "store/todolists-reducer";
+import { appReducer } from 'store/app-reducer'
+import { authReducer } from 'store/auth-reducer'
+import { tasksReducer } from 'store/tasks-reducer'
+import { todolistsReducer } from 'store/todolists-reducer'
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,

@@ -1,4 +1,4 @@
-import { setAppErrorAC, setAppStatusAC } from "store/app-reducer";
+import { setAppErrorAC, setAppStatusAC } from 'store'
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {

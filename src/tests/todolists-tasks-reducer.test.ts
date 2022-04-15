@@ -1,9 +1,6 @@
-import { IndexElement } from "enums/enums";
-import { tasksReducer } from "store/tasks-reducer";
-import { addTodolistTC, todolistsReducer } from "store/todolists-reducer";
-import { TasksStateType } from "types/tasksReducerType";
-import { TodolistDomainType } from "types/todoListReducerType";
-import { TodolistType } from "types/TypesAPI";
+import { IndexElement } from 'enums'
+import { addTodolistTC, tasksReducer, todolistsReducer } from 'store'
+import { TasksStateType, TodolistDomainType, TodolistType } from 'types'
 
 test('ids should be equals', () => {
   const startTasksState: TasksStateType = {}

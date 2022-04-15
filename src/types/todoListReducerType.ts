@@ -1,5 +1,4 @@
-import { RequestStatusType } from "types/appReducerType";
-import { TodolistType } from "types/TypesAPI";
+import { RequestStatusType, TodolistType } from 'types'
 
 export type ChangeTodolistTitleTCType = {
   id: string

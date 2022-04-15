@@ -1,4 +1,4 @@
-import { authReducer, setIsLoggedInAC } from "store/auth-reducer";
+import { authReducer, setIsLoggedInAC } from 'store'
 
 const initialState = {
   isLoggedIn: false,

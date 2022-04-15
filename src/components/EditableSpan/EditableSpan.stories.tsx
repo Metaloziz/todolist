@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-import { action } from "@storybook/addon-actions";
+import { action } from '@storybook/addon-actions'
 
-import { EditableSpan } from "./EditableSpan";
+import { EditableSpan } from './EditableSpan'
 
 export default {
   title: 'EditableSpan Stories',

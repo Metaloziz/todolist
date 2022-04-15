@@ -1,4 +1,4 @@
-import { v1 } from "uuid";
+import { v1 } from 'uuid'
 
 import {
   addTodolistTC,
@@ -7,11 +7,14 @@ import {
   changeTodolistTitleTC,
   fetchTodolistsTC,
   removeTodolistTC,
-  todolistsReducer
-} from "store/todolists-reducer";
-import { RequestStatusType } from "types/appReducerType";
-import { FilterValuesType, TodolistDomainType } from "types/todoListReducerType";
-import { TodolistType } from "types/TypesAPI";
+  todolistsReducer,
+} from 'store'
+import {
+  FilterValuesType,
+  RequestStatusType,
+  TodolistDomainType,
+  TodolistType,
+} from 'types'
 
 let todolistId1: string
 let todolistId2: string

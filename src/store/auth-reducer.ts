@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AxiosError } from 'axios'
 
-import { authAPI } from "api/todolists-api";
-import { StatusCode } from "enums/enums";
-import { setAppStatusAC } from "store/app-reducer";
-import { LoginParamsType } from "types/TypesAPI";
-import { handleServerAppError, handleServerNetworkError } from "utils/error-utils";
+import { authAPI } from 'api'
+import { StatusCode } from 'enums'
+import { setAppStatusAC } from 'store'
+import { LoginParamsType } from 'types'
+import { handleServerAppError, handleServerNetworkError } from 'utils'
 
 export const loginTC = createAsyncThunk(
   'auth/loginTC',

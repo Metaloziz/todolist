@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FC, KeyboardEvent, memo, useState } from "react";
+import React, { ChangeEvent, FC, KeyboardEvent, memo, useState } from 'react'
 
-import { IconButton, TextField } from "@material-ui/core";
-import { AddBox } from "@material-ui/icons";
+import { IconButton, TextField } from '@material-ui/core'
+import { AddBox } from '@material-ui/icons'
 
-import { KeyCharCode } from "enums/enums";
-import { AddItemFormPropsType } from "types/components";
+import { KeyCharCode } from 'enums'
+import { AddItemFormPropsType } from 'types'
 
 export const AddItemForm: FC<AddItemFormPropsType> = memo(
   ({ addItem, disabled = false }) => {
