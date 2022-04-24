@@ -1,4 +1,4 @@
-import {Dispatch} from 'redux'
+import {call, put} from 'redux-saga/effects'
 import {authAPI} from '../api/todolists-api'
 import {setIsLoggedInAC} from '../features/Login/auth-reducer'
 
@@ -35,17 +35,35 @@ export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', 
 export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
 export const setAppInitializedAC = (value: boolean) => ({type: 'APP/SET-IS-INITIALIED', value} as const)
 
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-    authAPI.me().then(res => {
-        if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC(true));
-        } else {
 
-        }
+export function* initializeAppWorkerSaga(): any {
 
-        dispatch(setAppInitializedAC(true));
-    })
+    let res = yield call(authAPI.me);
+
+    if (res.data.resultCode === 0) {
+        yield   put(setIsLoggedInAC(true));
+    } else {
+
+    }
+
+    yield  put(setAppInitializedAC(true));
 }
+
+export const initializeSagaAC = () => ({type: 'APP/INIT'})
+
+
+// export const initializeAppTC = () => async (dispatch: Dispatch) => {
+//     let res = await authAPI.me()
+//
+//     if (res.data.resultCode === 0) {
+//         dispatch(setIsLoggedInAC(true));
+//     } else {
+//
+//     }
+//
+//     dispatch(setAppInitializedAC(true));
+//
+// }
 
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
