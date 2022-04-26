@@ -1,4 +1,4 @@
-import {tasksReducer} from '../features/TodolistsList/tasks-reducer';
+import {fetchTasksWorker, removeTaskWorker, tasksReducer} from '../features/TodolistsList/tasks-reducer';
 import {todolistsReducer} from '../features/TodolistsList/todolists-reducer';
 import {applyMiddleware, combineReducers, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk'
@@ -25,6 +25,8 @@ export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, s
 
 function* sagaWatcher() {
     yield takeLatest('APP/INIT', initializeAppWorkerSaga);
+    yield takeLatest("TASKS/FETCH_TASKS", fetchTasksWorker);
+    yield takeLatest('TASK/REMOVE_TASK', removeTaskWorker);
 }
 
 sagaMiddleware.run(sagaWatcher)

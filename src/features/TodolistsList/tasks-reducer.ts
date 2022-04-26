@@ -2,15 +2,16 @@ import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType}
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../../api/todolists-api'
 import {Dispatch} from 'redux'
 import {AppRootStateType} from '../../app/store'
-import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from '../../app/app-reducer'
+import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from '../../app/app-reducer'
 import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils'
+import {call, put} from "redux-saga/effects";
 
 const initialState: TasksStateType = {}
 
 export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK':
-            return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id != action.taskId)}
+            return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id !== action.taskId)}
         case 'ADD-TASK':
             return {...state, [action.task.todoListId]: [action.task, ...state[action.task.todoListId]]}
         case 'UPDATE-TASK':
@@ -50,6 +51,24 @@ export const setTasksAC = (tasks: Array<TaskType>, todolistId: string) =>
     ({type: 'SET-TASKS', tasks, todolistId} as const)
 
 // thunks
+
+type FetchTasksWorkerType = ReturnType<typeof fetchTasksWorkerAC>
+export const fetchTasksWorkerAC = (todolistId: string) => ({
+    type: "TASKS/FETCH_TASKS", todolistId
+} as const)
+
+
+export function* fetchTasksWorker({todolistId}: FetchTasksWorkerType): any {
+    yield put(setAppStatusAC('loading'))
+
+    let res = yield call(todolistsAPI.getTasks, todolistId)
+
+    const tasks = res.data.items
+    yield put(setTasksAC(tasks, todolistId))
+    yield put(setAppStatusAC('succeeded'))
+
+}
+
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionsType | SetAppStatusActionType>) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.getTasks(todolistId)
@@ -59,6 +78,25 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionsT
             dispatch(setAppStatusAC('succeeded'))
         })
 }
+
+type RemoveTaskWorkerType = ReturnType<typeof removeTaskWorkerAC>
+
+export const removeTaskWorkerAC = (taskId: string, todolistId: string) => ({
+    type: 'TASK/REMOVE_TASK',
+    payload: {taskId, todolistId}
+} as const)
+
+
+export function* removeTaskWorker({payload: {taskId, todolistId}}: RemoveTaskWorkerType): any {
+
+    let res = yield call(todolistsAPI.deleteTask, todolistId, taskId)
+
+    const action = removeTaskAC(taskId, todolistId)
+    yield put(action)
+
+}
+
+
 export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch<ActionsType>) => {
     todolistsAPI.deleteTask(todolistId, taskId)
         .then(res => {
